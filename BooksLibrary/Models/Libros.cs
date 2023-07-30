@@ -7,16 +7,15 @@ namespace BooksLibrary.Models
     {
 
         [BsonId]
-        public ObjectId _id { get; set; }
+        public int _id { get; set; }
 
-        public string Nombre { get; set; }
-        public int Edad { get; set; }
-
-        public string Email { get; set; }
-        public string direccion { get; set; }
-        public string Ciudad { get; set; }
-        public string Pais { get; set; }
-        public int Libro_id { get; set; }
+        public string titulo { get; set; }
+        public string autor { get; set; }
+       public int anio_publicacion { get; set; }
+        public string genero { get; set; }
+        public string editorial { get; set; }
+        public string sinopsis { get; set; }
+        public int precio { get; set; }
 
 
     }

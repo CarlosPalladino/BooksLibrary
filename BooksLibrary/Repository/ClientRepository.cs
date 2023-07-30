@@ -33,14 +33,22 @@ namespace BooksLibrary.Repository
             return result > 0;
         }
 
-        public bool Delete(Cliente cliente)
+        public bool createClient(Cliente cliente)
         {
             throw new NotImplementedException();
         }
 
+        public bool Delete(Cliente cliente)
+        {
+
+            var filter = Builders<Cliente>.Filter.Eq(c => c._id, cliente._id);
+            _clientes.DeleteOne(filter);
+            return true;
+        }
+
         public Cliente GetCliente(int ClienteId)
         {
-            var objectId = new ObjectId(ClienteId.ToString());
+            //var objectId = new ObjectId(ClienteId.ToString());
             var filter = Builders<Cliente>.Filter.Where(c => c._id == ClienteId);
             var result = _clientes.Find(filter).FirstOrDefault();
             return result;
@@ -54,12 +62,6 @@ namespace BooksLibrary.Repository
 
         }
 
-        public ICollection<Libros> GetLibrosByCliente(int libro_id)
-        {
-            var filter = Builders<Libros>.Filter.Where(c => libro_id == c.Libro_id);
-            var libros = _libros.Find(filter).ToList();
-            return libros;
-        }
 
         public bool Save(Cliente cliente)
         {

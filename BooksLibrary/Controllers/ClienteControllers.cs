@@ -44,21 +44,21 @@ namespace BooksLibrary.Controllers
 
             return Ok(client);
         }
-        [HttpGet("libros/{clienteId}")]
-        [ProducesResponseType(200)]
-        public IActionResult GetLibrosByCliente(int libro_Id)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            if (!repo.clienteExists(libro_Id)) ;
+        //[HttpGet("libros/{clienteId}")]
+        //[ProducesResponseType(200)]
+        //public IActionResult GetLibrosByCliente(int libro_Id)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
+        //    if (!repo.clienteExists(libro_Id)) ;
 
 
-            var libro = repo.GetLibrosByCliente(libro_Id);
+        //    var libro = repo.(libro_Id);
 
-            return Ok(libro_Id);
+        //    return Ok(libro);
 
 
-        }
+        //}
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -78,6 +78,15 @@ namespace BooksLibrary.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var clienteSave = repo.Save(createCliente);
+            if (!clienteSave)
+            {
+                ModelState.AddModelError("", "paso algo mientras se guardaba el usuario");
+
+                return StatusCode(500, ModelState);
+            }
+
+
             return Ok("success");
         }
         [HttpPut("{clientId}")]
@@ -90,13 +99,13 @@ namespace BooksLibrary.Controllers
             if (UpdateClient == null)
                 return BadRequest(ModelState);
 
-            ObjectId clienteObjectId = new ObjectId(clienteId.ToString());
-
-            if (!clienteObjectId.Equals(updateCliente._id))
+        if(!repo.clienteExists(clienteId))
                 return BadRequest(ModelState);
 
-            return Ok("Update Success");
 
+            var updateClient = repo.Update(updateCliente);
+
+            return Ok("Update Success");
 
         }
         [HttpDelete("{clienteId}")]
