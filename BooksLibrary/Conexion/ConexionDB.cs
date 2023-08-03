@@ -7,12 +7,15 @@ namespace BooksLibrary.Conexion
     {
         public MongoClient Client;
         public IMongoDatabase Database;
-      public IMongoCollection<Cliente> Clientes;
+        public IMongoCollection<Cliente> Clientes;
+        public IMongoCollection<Libros> Libros;
         public ConexionDB()
         {
             Client = new MongoClient("mongodb://127.0.0.1:27017");
             Database = Client.GetDatabase("ClientresSotreDb");
-            Clientes =  Database.GetCollection<Cliente>("Clientes");
+            Libros = Database.GetCollection<Libros>("Libros");
+            Clientes = Database.GetCollection<Cliente>("Clientes");
+
         }
 
 

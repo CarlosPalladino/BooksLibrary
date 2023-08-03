@@ -11,7 +11,7 @@ namespace BooksLibrary.Models
 
         public string titulo { get; set; }
         public string autor { get; set; }
-       public int anio_publicacion { get; set; }
+        public int anio_publicacion { get; set; }
         public string genero { get; set; }
         public string editorial { get; set; }
         public string sinopsis { get; set; }

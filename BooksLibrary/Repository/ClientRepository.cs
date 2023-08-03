@@ -14,7 +14,6 @@ namespace BooksLibrary.Repository
     public class ClientRepository : ClienteInterface
     {
         private readonly IMongoCollection<Cliente> _clientes;
-        private readonly IMongoCollection<Libros> _libros;
 
 
         public ClientRepository()
@@ -25,7 +24,6 @@ namespace BooksLibrary.Repository
         }
         public bool clienteExists(int id)
         {
-            //var objectId = new ObjectId(id.ToString());
 
             var filter = Builders<Cliente>.Filter.Where(c => c._id == id);
             var result = _clientes.CountDocuments(filter);
@@ -48,7 +46,6 @@ namespace BooksLibrary.Repository
 
         public Cliente GetCliente(int ClienteId)
         {
-            //var objectId = new ObjectId(ClienteId.ToString());
             var filter = Builders<Cliente>.Filter.Where(c => c._id == ClienteId);
             var result = _clientes.Find(filter).FirstOrDefault();
             return result;
@@ -57,7 +54,6 @@ namespace BooksLibrary.Repository
         public ICollection<Cliente> GetClientes()
         {
             var clientes = _clientes.Find(_ => true).ToList();
-
             return clientes;
 
         }

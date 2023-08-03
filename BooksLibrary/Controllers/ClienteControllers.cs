@@ -44,21 +44,7 @@ namespace BooksLibrary.Controllers
 
             return Ok(client);
         }
-        //[HttpGet("libros/{clienteId}")]
-        //[ProducesResponseType(200)]
-        //public IActionResult GetLibrosByCliente(int libro_Id)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState);
-        //    if (!repo.clienteExists(libro_Id)) ;
-
-
-        //    var libro = repo.(libro_Id);
-
-        //    return Ok(libro);
-
-
-        //}
+    
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

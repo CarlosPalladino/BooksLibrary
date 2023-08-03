@@ -14,8 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<ConexionDB>(
 builder.Configuration.GetSection("Database"));
 builder.Services.AddSingleton<ClientRepository>();
+builder.Services.AddSingleton<LibropRepository>();
 builder.Services.AddScoped<ClienteInterface, ClientRepository>();
-
+builder.Services.AddScoped<LibrosInterface, LibropRepository>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
