@@ -2,7 +2,6 @@
 using BooksLibrary.Interfaces;
 using BooksLibrary.Models;
 using MongoDB.Driver;
-
 namespace BooksLibrary.Repository
 {
     public class LibropRepository : LibrosInterface
@@ -13,7 +12,7 @@ namespace BooksLibrary.Repository
         public LibropRepository()
         {
             var conexion = new ConexionDB();
-            _libros = conexion.Database.GetCollection<Libros>("Libros");
+            _libros = conexion.Database.GetCollection<Libros>("ibros");
         }
 
         public bool Delete(Libros libros)
@@ -26,14 +25,14 @@ namespace BooksLibrary.Repository
 
         public ICollection<Cliente> GeLibroByCliente(int id)
         {
-            var filter = Builders<Cliente>.Filter.Where(c => id == c.libro_id);
+            var filter = Builders<Cliente>.Filter.Where(c => c._id == id);
             var result = _cliente.Find(filter).ToList();
+
             return result;
 
         }
-
-     
-
+ 
+   
         public Libros GetLibro(int id)
         {
             var filter = Builders<Libros>.Filter.Where(l => l._id == id);

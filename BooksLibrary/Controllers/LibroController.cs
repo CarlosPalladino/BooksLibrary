@@ -13,9 +13,10 @@ namespace BooksLibrary.Controllers
         private readonly LibrosInterface _libs;
         private readonly ClienteInterface _cliente;
 
-        public LibroController(LibrosInterface libros)
+        public LibroController(LibrosInterface libros,ClienteInterface cliente)
         {
             _libs = libros;
+            _cliente = cliente;
         }
         [HttpGet]
         [ProducesResponseType(200)]
@@ -44,16 +45,16 @@ namespace BooksLibrary.Controllers
             return Ok(libro);
         }
 
-        [HttpGet("libros/{clienteId}")]
+        [HttpGet("cliente/{clienteId}")]
         [ProducesResponseType(200)]
-        public IActionResult GetLibrosByCliente(int libro_Id)
+        public IActionResult GetLibrosByCliente(int clienteId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            if (!_cliente.clienteExists(libro_Id))
+            if (!_cliente.clienteExists(clienteId))
                 return BadRequest(ModelState);
 
-            var libro = _libs.GeLibroByCliente(libro_Id);
+            var libro = _cliente.GetCliente(clienteId);
 
             return Ok(libro);
         }
